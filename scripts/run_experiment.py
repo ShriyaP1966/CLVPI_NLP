@@ -21,6 +21,8 @@ from utils import (
 )
 
 from validate_dataset import validate_dataset
+from dataset_loader import DatasetLoader
+from result_writer import ResultWriter
 
 # Temporary provider
 from providers.mock_provider import MockProvider
@@ -62,7 +64,7 @@ class ExperimentRunner:
             exist_ok=True
         )
 
-        print(f"Experiment Folder:")
+        print("Experiment Folder:")
         print(self.experiment_path)
 
         self.logger.info(
@@ -98,6 +100,49 @@ class ExperimentRunner:
                 indent=4
             )
 
+    def execute_tasks(self, tasks):
+        """
+        Execute benchmark tasks using the selected provider.
+        """
+
+        responses = []
+
+        total = len(tasks)
+
+        print()
+        print("Running benchmark...")
+        print()
+
+        for index, task in enumerate(tasks, start=1):
+
+            response = self.provider.generate_response(
+                task["prompt"]
+            )
+
+            task_result = {
+
+                "attack_id": task["attack_id"],
+
+                "variation_id": task["variation_id"],
+
+                "attack_category": task["attack_category"],
+
+                "language": task["language"],
+
+                "prompt": task["prompt"],
+
+                "response": response,
+
+                "provider": self.provider.__class__.__name__,
+
+            }
+
+            responses.append(task_result)
+
+            print(f"[{index}/{total}] Completed")
+
+        return responses
+
     def run(self):
 
         print("=" * 60)
@@ -114,13 +159,45 @@ class ExperimentRunner:
 
         print("\nDataset validation passed.\n")
 
+        loader = DatasetLoader()
+
+        tasks = loader.load_tasks()
+
+        print(f"Loaded {len(tasks)} benchmark tasks.")
+
+        responses = self.execute_tasks(tasks)
+
+        print()
+
+        print(f"Generated {len(responses)} responses.")
+
+        writer = ResultWriter()
+
+        output_path = writer.save_results(responses)
         self.create_experiment_directory()
 
         self.save_metadata()
 
-        print("\nFramework initialized successfully.")
+        print()
 
-        print("\nReady to begin experiment.")
+        print("=" * 60)
+        print("EXECUTION SUMMARY")
+        print("=" * 60)
+
+        print(f"Provider          : {self.provider.__class__.__name__}")
+
+        print(f"Benchmark Tasks   : {len(tasks)}")
+
+        print(f"Responses Created : {len(responses)}")
+
+        print(f"Output File       : {output_path}")
+
+        print(f"Experiment Folder : {self.experiment_path}")
+
+        print()
+        print("STATUS : SUCCESS")
+
+        print("=" * 60)
 
         self.logger.info(
             "Framework initialized."
