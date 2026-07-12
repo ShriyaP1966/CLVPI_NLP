@@ -1,0 +1,61 @@
+{
+    "experiment_name": "Multilingual Safety Benchmark",
+
+    "dataset": {
+        "path": "data/working_dataset.csv",
+        "encoding": "utf-8"
+    },
+
+    "models": {
+        "openai": {
+            "enabled": true,
+            "model": "gpt-5-mini"
+        },
+
+        "gemini": {
+            "enabled": true,
+            "model": "gemini-2.5-flash"
+        }
+    },
+
+    "generation": {
+        "temperature": 0.0,
+        "max_output_tokens": 512,
+        "timeout": 60
+    },
+
+    "runtime": {
+        "retry_attempts": 5,
+        "retry_delay": 2,
+        "save_every_response": true
+    },
+
+    "outputs": {
+    "raw": "outputs/raw",
+    "evaluated": "outputs/evaluated",
+    "merged": "outputs/merged",
+    "statistics": "outputs/statistics",
+    "figures": "outputs/figures"
+    },
+
+    "experiments": {
+    "directory": "experiments"
+    },
+
+    "logging": {
+    "directory": "logs",
+    "level": "INFO"
+    },
+
+    "benchmark": {
+    "languages": [
+        "en",
+        "hi",
+        "mr"
+    ],
+
+    "expected_categories": 13,
+
+    "expected_variations": 8
+    }
+}

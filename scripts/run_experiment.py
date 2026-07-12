@@ -1,0 +1,134 @@
+"""
+run_experiment.py
+
+Main experiment runner for the Multilingual LLM Safety Benchmark.
+
+This script:
+1. Loads configuration
+2. Validates the dataset
+3. Creates a new experiment directory
+4. Initializes the selected provider
+5. Runs the benchmark
+"""
+
+from pathlib import Path
+from datetime import datetime
+import json
+
+from utils import (
+    load_config,
+    setup_logger,
+)
+
+from validate_dataset import validate_dataset
+
+# Temporary provider
+from providers.mock_provider import MockProvider
+
+
+class ExperimentRunner:
+    """
+    Main experiment controller.
+    """
+
+    def __init__(self):
+
+        self.config = load_config()
+
+        self.logger = setup_logger(
+            logger_name="experiment"
+        )
+
+        self.provider = MockProvider()
+
+        self.experiment_path = None
+
+    def create_experiment_directory(self):
+        """
+        Create a unique experiment folder.
+        """
+
+        timestamp = datetime.now().strftime(
+            "%Y%m%d_%H%M%S"
+        )
+
+        self.experiment_path = (
+            Path("experiments")
+            / f"EXP_{timestamp}"
+        )
+
+        self.experiment_path.mkdir(
+            parents=True,
+            exist_ok=True
+        )
+
+        print(f"Experiment Folder:")
+        print(self.experiment_path)
+
+        self.logger.info(
+            f"Experiment Folder: {self.experiment_path}"
+        )
+
+    def save_metadata(self):
+        """
+        Save experiment metadata.
+        """
+
+        metadata = {
+
+            "experiment_time": datetime.now().isoformat(),
+
+            "model": "MockProvider",
+
+            "dataset": self.config["dataset"]["path"],
+
+            "status": "initialized"
+
+        }
+
+        with open(
+            self.experiment_path / "metadata.json",
+            "w",
+            encoding="utf-8"
+        ) as f:
+
+            json.dump(
+                metadata,
+                f,
+                indent=4
+            )
+
+    def run(self):
+
+        print("=" * 60)
+        print("MULTILINGUAL SAFETY BENCHMARK")
+        print("=" * 60)
+
+        print("\nValidating dataset...\n")
+
+        if not validate_dataset():
+
+            print("\nDataset validation failed.")
+
+            return
+
+        print("\nDataset validation passed.\n")
+
+        self.create_experiment_directory()
+
+        self.save_metadata()
+
+        print("\nFramework initialized successfully.")
+
+        print("\nReady to begin experiment.")
+
+        self.logger.info(
+            "Framework initialized."
+        )
+
+
+if __name__ == "__main__":
+
+    runner = ExperimentRunner()
+
+    runner.run()

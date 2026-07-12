@@ -1,0 +1,6 @@
+pandas
+openai
+google-genai
+python-dotenv
+tqdm
+matplotlib
