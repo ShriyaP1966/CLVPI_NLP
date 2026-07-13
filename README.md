@@ -1,135 +1,140 @@
-# 🛡️ Multilingual LLM Safety Benchmark
+# 🌍 Multilingual LLM Safety Evaluation Framework
 
-> A research-oriented framework for evaluating the multilingual safety behaviour of Large Language Models (LLMs) against adversarial prompt attacks in **English, Hindi, and Marathi**.
-
----
-
-## 📖 Overview
-
-Large Language Models (LLMs) are increasingly deployed in real-world applications where safe and reliable responses are essential. However, most existing safety evaluations focus primarily on English, leaving multilingual safety behaviour underexplored.
-
-This project aims to build a **reproducible multilingual benchmarking framework** for evaluating and comparing the safety behaviour of different LLMs across English, Hindi, and Marathi using adversarial prompts.
-
-The benchmark is being developed as a research project with the goal of producing a publication-quality evaluation framework.
+A modular research framework for benchmarking, evaluating, and analyzing the safety of multilingual Large Language Models (LLMs). The framework is designed to compare model behavior across multiple languages and will later include an AI-powered safety classifier for unseen LLM responses.
 
 ---
 
 ## 🎯 Objectives
 
-- Build a multilingual safety benchmark for LLMs.
-- Compare safety behaviour across multiple languages.
-- Evaluate OpenAI GPT and Google Gemini models.
-- Create a reproducible benchmarking pipeline.
-- Generate structured outputs for research and analysis.
+- Benchmark multilingual LLM safety performance
+- Compare GPT and Gemini across English, Hindi, and Marathi
+- Generate reproducible experiments
+- Produce statistics and visualizations
+- Build a reusable evaluation framework
+- Extend the framework with an automated safety classifier
 
 ---
 
-## 🌍 Languages
+## ✨ Features
 
-- 🇬🇧 English
+### ✅ Implemented
+
+- Dataset validation
+- UTF-8 sanitization
+- Multilingual dataset loader
+- Benchmark execution engine
+- Provider Factory architecture
+- Mock provider for testing
+- Experiment management
+- Result writer
+- Configuration-driven execution
+
+### 🚧 In Progress
+
+- OpenAI integration
+- Gemini integration
+- Automatic response evaluation
+- Statistics generation
+- Graph generation
+- Research report generation
+
+### 🔮 Planned
+
+- Multilingual safety classifier
+- Additional LLM providers
+- Interactive dashboard
+- Web application
+
+---
+
+## 🌐 Languages
+
+- 🇺🇸 English
 - 🇮🇳 Hindi
 - 🇮🇳 Marathi
 
 ---
 
-## 🤖 Target Models
-
-### Current
-- Mock Provider (Pipeline Testing)
-
-### Planned
-- GPT-5 mini (OpenAI API)
-- Gemini 2.5 Flash (Google AI API)
-
----
-
 ## 📊 Benchmark Dataset
 
-| Attribute | Value |
-|-----------|------:|
-| Languages | 3 |
-| Dataset Rows | 104 |
-| Benchmark Tasks | 312 |
-| Attack Categories | 13 |
-| Prompt Variations | 8 |
+Current dataset includes:
+
+- **104 multilingual prompt sets**
+- **312 benchmark tasks**
+- **13 attack categories**
+- **3 languages**
 
 ---
 
-## 🔄 Current Benchmark Pipeline
+## 🏗 Architecture
 
 ```text
-Master Dataset
-      │
-      ▼
-IndicTrans2 Translation
-      │
-      ▼
-Manual Verification
-      │
-      ▼
-UTF-8 Sanitization
-      │
-      ▼
-Dataset Validation
-      │
-      ▼
-Dataset Loader
-      │
-      ▼
-312 Benchmark Tasks
-      │
-      ▼
-Mock Provider
-      │
-      ▼
-Response Collection
-      │
-      ▼
-CSV Result Writer
+Dataset
+   │
+   ▼
+Validation
+   │
+   ▼
+Task Generation
+   │
+   ▼
+Provider Factory
+   │
+   ├── Mock
+   ├── OpenAI
+   └── Gemini
+   │
+   ▼
+Benchmark Engine
+   │
+   ▼
+Result Writer
+   │
+   ▼
+Evaluation
+   │
+   ▼
+Statistics & Visualizations
 ```
 
 ---
 
-## ⚙️ Features Implemented
+## 🛠 Tech Stack
 
-### Dataset Processing
-- ✅ UTF-8 dataset sanitization
-- ✅ Dataset validation
-- ✅ Required column validation
-- ✅ Duplicate prompt detection
-- ✅ Missing value detection
+**Language**
+- Python 3.13
 
-### Benchmark Engine
-- ✅ Dataset loader
-- ✅ Benchmark task generation
-- ✅ Mock provider execution
-- ✅ Result writer
-- ✅ CSV result generation
-- ✅ Execution summary
-- ✅ Experiment metadata generation
+**Libraries**
+- pandas
+- numpy
+- OpenAI API
+- Google Gemini API
+- matplotlib
+- python-dotenv
+
+**Translation**
+- Hugging Face Transformers
+- IndicTrans2
+
+**Tools**
+- Git
+- GitHub
+- VS Code
 
 ---
 
-## 🏗️ Project Structure
+## 📂 Project Structure
 
-```text
-CLVPI_NLP
+```
+NLP_Safety_Benchmark/
 │
 ├── config/
 ├── data/
-├── dev_tools/
 ├── experiments/
-├── logs/
 ├── outputs/
-│   ├── raw/
-│   ├── evaluated/
-│   ├── merged/
-│   ├── statistics/
-│   └── figures/
-│
 ├── scripts/
-│   ├── analysis/
 │   ├── providers/
+│   ├── analysis/
 │   ├── dataset_loader.py
 │   ├── result_writer.py
 │   ├── run_experiment.py
@@ -137,87 +142,73 @@ CLVPI_NLP
 │   ├── validate_dataset.py
 │   └── utils.py
 │
-├── README.md
-├── requirements.txt
-└── .gitignore
+└── README.md
 ```
 
 ---
 
-## 🛠️ Technology Stack
+## 🚀 Getting Started
 
-### Programming
-- Python
+Clone the repository
 
-### Data Processing
-- Pandas
+```bash
+git clone https://github.com/ShriyaP1966/CLVPI_NLP.git
+```
 
-### Translation
-- Hugging Face
-- IndicTrans2
+Install dependencies
 
-### APIs (Planned)
-- OpenAI API
-- Google Gemini API
+```bash
+pip install -r requirements.txt
+```
 
-### Version Control
-- Git
-- GitHub
+Run the benchmark
+
+```bash
+python scripts/run_experiment.py
+```
 
 ---
 
-## 🚀 Development Progress
+## 🗺 Roadmap
 
-### ✅ Completed
-- [x] Project architecture
-- [x] Configuration management
-- [x] UTF-8 sanitization
+- [x] Project foundation
 - [x] Dataset validation
-- [x] Dataset loader
-- [x] Benchmark task generation
-- [x] Mock execution engine
-- [x] Result writer
-- [x] CSV output generation
-- [x] Execution summary
-
-### 🚧 In Progress
-- [ ] Provider Factory
-
-### 📌 Planned
-- [ ] OpenAI Provider
-- [ ] Gemini Provider
-- [ ] Automatic Evaluation Engine
-- [ ] Statistical Analysis
-- [ ] Graph Generation
-- [ ] Cross-model Comparison
-- [ ] Research Paper
+- [x] Benchmark execution engine
+- [x] Provider Factory architecture
+- [x] Mock provider
+- [ ] OpenAI integration
+- [ ] Gemini integration
+- [ ] Automatic evaluation
+- [ ] Statistics & graphs
+- [ ] Research-ready reports
+- [ ] Safety classifier
+- [ ] Web interface
 
 ---
 
-## 📅 Development Timeline
+## 🎓 Research Vision
 
-| Day | Milestone | Status |
-|------|-----------|--------|
-| Day 1 | Project Foundation | ✅ |
-| Day 2 | Benchmark Execution Engine | ✅ |
-| Day 3 | Provider Factory | ⏳ |
-| Day 4 | OpenAI Integration | ⏳ |
-| Day 5 | Gemini Integration | ⏳ |
-| Day 6 | Evaluation Engine | ⏳ |
-| Day 7 | Statistics & Analysis | ⏳ |
-| Day 8+ | Research & Documentation | ⏳ |
+This project aims to evolve into a complete multilingual LLM safety evaluation platform by combining:
+
+- Benchmarking
+- Automated evaluation
+- Statistical analysis
+- Cross-model comparison
+- AI-powered safety classification
+
+The framework is designed to be modular, reproducible, and easily extendable for future LLMs and multilingual safety research.
 
 ---
 
-## 🔬 Research Focus
+## 📄 License
 
-This benchmark investigates:
+**All Rights Reserved.**
 
-- Multilingual safety alignment
-- Prompt injection robustness
-- Jailbreak resistance
-- Cross-language response consistency
-- Safety behaviour across adversarial prompt attacks
+This repository is provided for viewing, educational, and research reference only.
+
+No permission is granted to copy, modify, redistribute, or commercially use the source code without prior written permission from the author.
+
+See the [LICENSE](LICENSE) file for full terms.
 
 ---
 
@@ -227,8 +218,9 @@ This benchmark investigates:
 
 B.Sc. Artificial Intelligence
 
-Research Project • 2026
-
----
-
-⭐ **Project Status:** Active Development
+**Research Interests**
+- Artificial Intelligence
+- Large Language Models (LLMs)
+- AI Safety
+- Natural Language Processing
+- Multilingual AI
