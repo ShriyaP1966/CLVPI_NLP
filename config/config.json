@@ -1,12 +1,13 @@
 {
     "experiment_name": "Multilingual Safety Benchmark",
 
-    "dataset": {
-        "path": "data/working_dataset.csv",
-        "encoding": "utf-8"
-    },
+    "provider": "mock",
 
     "models": {
+        "mock": {
+            "enabled": true
+        },
+
         "openai": {
             "enabled": true,
             "model": "gpt-5-mini"
@@ -16,6 +17,11 @@
             "enabled": true,
             "model": "gemini-2.5-flash"
         }
+    },
+
+    "dataset": {
+        "path": "data/working_dataset.csv",
+        "encoding": "utf-8"
     },
 
     "generation": {
@@ -31,31 +37,30 @@
     },
 
     "outputs": {
-    "raw": "outputs/raw",
-    "evaluated": "outputs/evaluated",
-    "merged": "outputs/merged",
-    "statistics": "outputs/statistics",
-    "figures": "outputs/figures"
+        "raw": "outputs/raw",
+        "evaluated": "outputs/evaluated",
+        "merged": "outputs/merged",
+        "statistics": "outputs/statistics",
+        "figures": "outputs/figures"
     },
 
     "experiments": {
-    "directory": "experiments"
+        "directory": "experiments"
     },
 
     "logging": {
-    "directory": "logs",
-    "level": "INFO"
+        "directory": "logs",
+        "level": "INFO"
     },
 
     "benchmark": {
-    "languages": [
-        "en",
-        "hi",
-        "mr"
-    ],
+        "languages": [
+            "en",
+            "hi",
+            "mr"
+        ],
 
-    "expected_categories": 13,
-
-    "expected_variations": 8
+        "expected_categories": 13,
+        "expected_variations": 8
     }
 }

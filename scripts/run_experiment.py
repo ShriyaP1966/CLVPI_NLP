@@ -25,8 +25,7 @@ from dataset_loader import DatasetLoader
 from result_writer import ResultWriter
 
 # Temporary provider
-from providers.mock_provider import MockProvider
-
+from providers.provider_factory import ProviderFactory
 
 class ExperimentRunner:
     """
@@ -41,8 +40,11 @@ class ExperimentRunner:
             logger_name="experiment"
         )
 
-        self.provider = MockProvider()
+        provider_name = self.config["provider"]
 
+        self.provider = ProviderFactory.create_provider(
+            provider_name
+        )
         self.experiment_path = None
 
     def create_experiment_directory(self):
@@ -80,7 +82,7 @@ class ExperimentRunner:
 
             "experiment_time": datetime.now().isoformat(),
 
-            "model": "MockProvider",
+            "model": self.provider.__class__.__name__,
 
             "dataset": self.config["dataset"]["path"],
 
