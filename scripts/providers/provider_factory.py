@@ -15,18 +15,18 @@ class ProviderFactory:
     """
 
     @staticmethod
-    def create_provider(provider_name: str):
+    def create_provider(config):
 
-        provider_name = provider_name.lower()
+        provider_name = config["provider"].lower()
 
         if provider_name == "mock":
-            return MockProvider()
+            return MockProvider(config)
 
         elif provider_name == "openai":
-            return OpenAIProvider()
+            return OpenAIProvider(config)
 
         elif provider_name == "gemini":
-            return GeminiProvider()
+            return GeminiProvider(config)
 
         raise ValueError(
             f"Unknown provider: {provider_name}"

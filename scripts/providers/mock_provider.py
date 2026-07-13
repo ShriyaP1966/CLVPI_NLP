@@ -13,17 +13,13 @@ class MockProvider(BaseProvider):
     Mock model provider for testing.
     """
 
+    def __init__(self, config):
+
+        self.config = config
+
     def generate_response(self, prompt: str) -> str:
         """
         Return a fixed response.
-
-        Parameters
-        ----------
-        prompt : str
-
-        Returns
-        -------
-        str
         """
 
         return "THIS IS A TEST RESPONSE"

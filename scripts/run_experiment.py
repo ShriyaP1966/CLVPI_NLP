@@ -40,10 +40,8 @@ class ExperimentRunner:
             logger_name="experiment"
         )
 
-        provider_name = self.config["provider"]
-
         self.provider = ProviderFactory.create_provider(
-            provider_name
+            self.config
         )
         self.experiment_path = None
 

@@ -1,7 +1,7 @@
 """
 openai_provider.py
 
-Placeholder OpenAI provider.
+OpenAI provider implementation.
 """
 
 from .base_provider import BaseProvider
@@ -9,11 +9,35 @@ from .base_provider import BaseProvider
 
 class OpenAIProvider(BaseProvider):
     """
-    Placeholder provider.
+    OpenAI model provider.
     """
 
-    def generate_response(self, prompt: str) -> str:
+    def __init__(self, config):
+
+        self.config = config
+
+        self.model = config["models"]["openai"]["model"]
+
+        self.temperature = config["generation"]["temperature"]
+
+        self.max_tokens = config["generation"]["max_output_tokens"]
+
+        self.timeout = config["generation"]["timeout"]
+
+        self.retry_attempts = config["runtime"]["retry_attempts"]
+
+        self.retry_delay = config["runtime"]["retry_delay"]
+
+    def generate_response(
+        self,
+        prompt: str
+    ) -> str:
+        """
+        Generate a response.
+
+        API implementation will be added later.
+        """
 
         raise NotImplementedError(
-            "OpenAI provider not implemented yet."
+            "OpenAI API integration not completed."
         )
