@@ -94,3 +94,7 @@ dist/
 
 *.tmp
 *.temp
+
+# API Keys & Secrets
+*.pem
+*.key

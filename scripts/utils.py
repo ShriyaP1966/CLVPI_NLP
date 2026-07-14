@@ -11,10 +11,18 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 from pathlib import Path
 from datetime import datetime
 
 import pandas as pd
+from dotenv import load_dotenv
+
+# ---------------------------------------------------------------------
+# Environment Variables
+# ---------------------------------------------------------------------
+
+load_dotenv()
 
 
 # ---------------------------------------------------------------------
@@ -177,3 +185,29 @@ def save_dataframe(
         index=False,
         encoding="utf-8-sig"
     )
+
+# ---------------------------------------------------------------------
+# Environment Variables
+# ---------------------------------------------------------------------
+
+def get_environment_variable(variable_name: str) -> str:
+    """
+    Retrieve an environment variable.
+
+    Parameters
+    ----------
+    variable_name : str
+
+    Returns
+    -------
+    str
+    """
+
+    value = os.getenv(variable_name)
+
+    if not value:
+        raise ValueError(
+            f"Missing environment variable: {variable_name}"
+        )
+
+    return value
